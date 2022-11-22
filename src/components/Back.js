@@ -5,7 +5,7 @@ import A from "leaflet";
 
 const zoom = 15;
 let db = [];
-let _map;
+let _map; 
 
 const Back = () => {
   const mRef = useRef();
@@ -16,30 +16,30 @@ const Back = () => {
     _map = map;
     map.locate({
       setView: true,
-    });
+    }); //component attribute
     setTimeout(() => {}, 1000);
     map.on("locationfound", handleLocation)
   }, [mRef]);
 
   const handleLocation = (event) => {
-    const { lat, lng } = event.latlng;
+    const { lat, lng } = event.latlng; //use lat,lng
 
-    const date = new Date(event.timestamp).toUTCString();
+    const date = new Date(event.timestamp).toUTCString();  //getdate
     // console.log(new Date(event.timestamp).toISOString());
     getLocalStorage();
 
-    A.marker([lat, lng]).bindPopup(date).openPopup().addTo(_map);
+    A.marker([lat, lng]).bindPopup(date).openPopup().addTo(_map); //get A=leaflet marker.open pop-up
     _map.setZoom(zoom);
-    if (db.length === 0) db.push({ lat, lng, date });
+    if (db.length === 0) db.push({ lat, lng, date }); 
 
-    setLocalStorage();
+    setLocalStorage(); 
   };
 
   const addHandler = () => {
     const { lat, lng } = _map.getCenter();
     const date = new Date().toUTCString();
     A.marker([lat, lng]).bindPopup(date).openPopup().addTo(_map);
-    db.push({ lat, lng, date });
+    db.push({ lat, lng, date }); //get for  db 
     setLocalStorage();
   }
   
@@ -51,8 +51,8 @@ const Back = () => {
 
   const downloadHandler = () => {
     const fileData = JSON.stringify(db, null,1); 
-    const blob = new Blob([fileData], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
+    const blob = new Blob([fileData], { type: "text/plain" }); //give data 
+    const url = URL.createObjectURL(blob); //and convert url
     const link = document.createElement("a");
     link.download = "locationinfo.json";
     link.href = url;
@@ -100,8 +100,8 @@ const Back = () => {
 };
 
 export default Back;
-
-const Container = styled.div`
+//mapping border
+const Container = styled.div` 
   display: inline-block;
   padding: 1rem;
   margin-top: 0.5rem;
@@ -110,20 +110,19 @@ const Container = styled.div`
   background: transparent; 
   
 `;
-
-const MapCon = styled.div`
-  
+//mapping scale
+const MapCon = styled.div` 
   height: 100%;
   width: 100%;
   display: inline-block;
-  border-radius: 30px;
+  border-radius: 60px;
 `;
 
 const ControlContainer = styled.div`
   flex-grow: 1;
-  margin-left: center;
+  margin-left: left;
 `;
-
+//button
 const Button = styled.button`
   color: #fff;
   background: red;

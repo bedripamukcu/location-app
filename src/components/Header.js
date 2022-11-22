@@ -15,11 +15,12 @@ const Header = () => {
 
 export default Header;
 
+//title
 const Nav = styled.nav`
   height: 50px;
   display: flex;
   align-items: center;
-  justify-content:center;
+  justify-content:left;
   overflow-x: hidden;
 `;
 
